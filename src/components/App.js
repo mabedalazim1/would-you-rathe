@@ -1,30 +1,44 @@
-import React, { Component} from "react"
-import { connect } from "react-redux"
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading'
+import { Spinner } from 'react-bootstrap'
 import './../App.css'
-
+import Login from './Login'
 
 class App extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.dispatch(handleInitialData())
   }
- render(){
-  return (
-    <div className="App">
-      
-      <h1>Learn React Rather</h1>
-      <h3>Project 2</h3>
-     
-    </div>
-  )
-}}
+  render () {
+    const { loadingBar, authedUser } = this.props
+    let showLoading = false
+    if (loadingBar.default === undefined || loadingBar.default === 1) {
+      showLoading = true
+    }
 
-function mapStateToProps({loadingBar, authedUser }) {
-	return {
+    return (
+      <div className='App'>
+        <LoadingBar />
+        {showLoading ? (
+          <div>
+            <Spinner animation='border' variant='warning' />
+            <br />
+            <i>Loading ... </i>
+          </div>
+        ) : (
+          <Login />
+        )}
+      </div>
+    )
+  }
+}
+
+function mapStateToProps ({ loadingBar, authedUser }) {
+  return {
     loadingBar,
-    authedUser,
-	}
+    authedUser
+  }
 }
 
 export default connect(mapStateToProps)(App)
