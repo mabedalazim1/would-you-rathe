@@ -1,40 +1,65 @@
 import React, { Component } from "react"
 import { connect } from 'react-redux'
+import { SET_AUTHED }from '../actions/authedUser'
+import Home from './Home'
 
 class Login extends Component {
-    state ={
-        errMsg: "  ..   Mohamed"
-    }
-    
+ 
+        state ={
+            errMsg: "",
+            user:"",
+            category:{}
+        }
+   
+    handleChange(event) {
+    console.log( event.target.value)
+  }
+  signin = ()=>{
+     this.props.dd(this.input.value)
+  }
     render() {
-
+    console.log('Data',this.props)
         const { userNames } = this.props;
 		const { errMsg } = this.state;
-        console.log(this.state)
-        console.log('props',this.props)
         return (
             <div>
-            <h2>Login Project</h2>
+            <h2>Login </h2>  
+                <select 
+                defaultValue={this.state.selectValue} 
+                onChange={this.handleChange}
+                ref={input => {
+                  this.input = input
+                }}
+                >
                 {
                     userNames.map((item) =>
-                        <li key={ item.id }>
-                            { item.name }
-                            {errMsg}
-                    </li>
+                      <option
+                        key={item.id} value={item.id}
+                        >
+                        {item.name}              
+                     </option>
                     )
-               }
+               }  
+                </select>
+                <button onClick={this.signin}>SignIn</button>
             </div>
         )
     }
 }
 
-function mapStateToProps({ users }) {
+const  mapStateToProps =({ users }) =>{
 	return {
 		userNames: Object.keys(users).map((id) => ({
 			id: id,
-			name: users[id].name
+			name: users[id].name,
+            img: users[id].avatarURL
 		}))
 	}
 }
 
-export default connect(mapStateToProps)(Login);
+const  mapdispatchToProps =(dispatch)=> {
+	return {
+        dd: (id)=> dispatch({type: SET_AUTHED,id})
+}
+}
+export default connect(mapStateToProps, mapdispatchToProps)(Login);

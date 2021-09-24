@@ -1,10 +1,10 @@
 export const SET_AUTHED = 'SET_AUTHED'
 export const RESET_AUTHED = 'RESET_AUTHED'
 
-export function setAuthed(id) {
+export function setAuthed(name) {
 	return {
 		type: SET_AUTHED,
-		id
+		name,
 	};
 }
 

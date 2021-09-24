@@ -5,6 +5,7 @@ import LoadingBar from 'react-redux-loading'
 import { Spinner } from 'react-bootstrap'
 import './../App.css'
 import Login from './Login'
+import Home from './Home'
 
 class App extends Component {
   componentDidMount () {
@@ -27,7 +28,8 @@ class App extends Component {
             <i>Loading ... </i>
           </div>
         ) : (
-          <Login />
+          !authedUser ? <Login />: 
+          <Home />
         )}
       </div>
     )
