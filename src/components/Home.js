@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { RESET_AUTHED} from '../actions/authedUser'
 import Login from './Login'
 
 class Home extends Component {
     logout =()=>{
-        console.log('LogOut')
+        this.props.restAutherUser("")
     }
-    render(){
-        console.log(this.props)
+    render() {
+        const { authedUser } = this.props
         return(
-            <div> 
-                <div>Home Page</div>
+            <div className='con'>
+                {console.log("Home : ",authedUser)}
+                { authedUser &&
+                <React.Fragment>
+                 <h1>Home Page</h1> 
                 <button onClick={this.logout}>LogOut</button>
+                </React.Fragment>
+            }
             </div>
            
         )
@@ -22,4 +28,10 @@ const mapStateToProps = state => {
   const { authedUser } = state;
   return { authedUser };
 }
-export default connect(mapStateToProps)(Home)
+
+const mapdispatchToProps = dispatch => {
+    return {
+        restAutherUser: (id) => dispatch({ type: RESET_AUTHED, id })
+    }
+}
+export default connect(mapStateToProps,mapdispatchToProps)(Home)

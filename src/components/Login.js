@@ -1,65 +1,75 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { SET_AUTHED }from '../actions/authedUser'
-import Home from './Home'
+import { Spinner } from 'react-bootstrap'
+import LoadingBar from 'react-redux-loading'
+
+import { SET_AUTHED } from '../actions/authedUser'
 
 class Login extends Component {
- 
-        state ={
-            errMsg: "",
-            user:"",
-            category:{}
-        }
-   
-    handleChange(event) {
-    console.log( event.target.value)
-  }
-  signin = ()=>{
-     this.props.dd(this.input.value)
-  }
+    state = {
+        showLoading: false
+    }
+
+    signin = () => {
+        this.props.setAuthedUser(this.select.value)
+    }
     render() {
-    console.log('Data',this.props)
-        const { userNames } = this.props;
-		const { errMsg } = this.state;
+
+        const { loadingBar } = this.props
+        let showLoading = false
+        if (loadingBar.default === undefined || loadingBar.default === 1) {
+            showLoading = true
+        }
+        const { userNames } = this.props
         return (
             <div>
-            <h2>Login </h2>  
-                <select 
-                defaultValue={this.state.selectValue} 
-                onChange={this.handleChange}
-                ref={input => {
-                  this.input = input
-                }}
-                >
-                {
-                    userNames.map((item) =>
-                      <option
-                        key={item.id} value={item.id}
-                        >
-                        {item.name}              
-                     </option>
+                { showLoading ? (
+                    <div>
+                        <LoadingBar />
+                        <Spinner animation='border' variant='warning' />
+                        <br />
+                        <i>Loading ... </i>
+                    </div>
+                )
+                    :
+                    (
+                        <div>
+                            <h2>Login </h2>
+                            <select
+                                defaultValue={ this.state.selectValue }
+                                ref={ select => {
+                                    this.select = select
+                                } }
+                            >
+                                { userNames.map(item => (
+                                    <option key={ item.id } value={ item.id }>
+                                        { item.name }
+                                    </option>
+                                )) }
+                            </select>
+                            <button onClick={ this.signin }>SignIn</button>
+                        </div>
                     )
-               }  
-                </select>
-                <button onClick={this.signin}>SignIn</button>
+                }
             </div>
         )
     }
 }
 
-const  mapStateToProps =({ users }) =>{
-	return {
-		userNames: Object.keys(users).map((id) => ({
-			id: id,
-			name: users[id].name,
+const mapStateToProps = ({ loadingBar, users }) => {
+    return {
+        userNames: Object.keys(users).map(id => ({
+            id: id,
+            name: users[id].name,
             img: users[id].avatarURL
-		}))
-	}
+        })),
+        loadingBar,
+    }
 }
 
-const  mapdispatchToProps =(dispatch)=> {
-	return {
-        dd: (id)=> dispatch({type: SET_AUTHED,id})
+const mapdispatchToProps = dispatch => {
+    return {
+        setAuthedUser: id => dispatch({ type: SET_AUTHED, id })
+    }
 }
-}
-export default connect(mapStateToProps, mapdispatchToProps)(Login);
+export default connect(mapStateToProps, mapdispatchToProps)(Login)

@@ -1,44 +1,49 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Route, Switch } from 'react-router-dom'
+
 import { handleInitialData } from '../actions/shared'
-import LoadingBar from 'react-redux-loading'
-import { Spinner } from 'react-bootstrap'
 import './../App.css'
 import Login from './Login'
 import Home from './Home'
+import NotFound from './NotFound'
+import NewQuestion from './NewQuestion'
+import Leaderboard from './Leaderboard'
 
 class App extends Component {
+  state = {
+    authedUser: null
+  }
   componentDidMount () {
     this.props.dispatch(handleInitialData())
   }
   render () {
-    const { loadingBar, authedUser } = this.props
-    let showLoading = false
-    if (loadingBar.default === undefined || loadingBar.default === 1) {
-      showLoading = true
-    }
-
+    const { authedUser } = this.props
+    const route =["/", '/add', '/leaderboard']
     return (
-      <div className='App'>
-        <LoadingBar />
-        {showLoading ? (
-          <div>
-            <Spinner animation='border' variant='warning' />
-            <br />
-            <i>Loading ... </i>
+      <React.Fragment>
+        <div className='App container'>
+          { !authedUser && <Login /> }
           </div>
-        ) : (
-          !authedUser ? <Login />: 
-          <Home />
-        )}
-      </div>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path='/add'>
+            <NewQuestion />
+          </Route>
+          <Route exact path='/leaderboard'>
+            <Leaderboard />
+          </Route>
+          <Route component={NotFound} />
+        </Switch>
+      </React.Fragment>
     )
   }
 }
 
-function mapStateToProps ({ loadingBar, authedUser }) {
+const mapStateToProps = ({ authedUser }) => {
   return {
-    loadingBar,
     authedUser
   }
 }
