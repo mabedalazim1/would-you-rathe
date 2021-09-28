@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import {  NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { RESET_AUTHED } from '../actions/authedUser'
-import { RESET_LOGGED } from '../actions/logged'
+import { isLogged, RESET_LOGGED } from '../actions/logged'
 
 import { Navbar, Container,Nav  } from 'react-bootstrap';
 
@@ -11,6 +11,7 @@ class NavItem extends Component{
         const logOut = () => {
             this.props.restLogged()
         }
+        const { isLogged }=this.props
         return (
             <div>
            
@@ -20,7 +21,9 @@ class NavItem extends Component{
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
-                                <button onClick={()=>{logOut()}}>Log Out</button>
+                                {isLogged.logged &&
+                                    <button onClick={ () => { logOut() } }>Log Out</button>
+                                }
                                 <NavLink className='nav-link' exact to="/">Home</NavLink>
                                 <NavLink className='nav-link' exact to="/add">Add</NavLink>
                             </Nav>
