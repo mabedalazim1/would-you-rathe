@@ -17,9 +17,10 @@ class Leaderboard extends Component{
     )
   }
 }
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser,isLogged }) => {
     return {
-      authedUser
+      authedUser,
+      isLogged,
     }
   }
   export default connect(mapStateToProps)(Leaderboard)

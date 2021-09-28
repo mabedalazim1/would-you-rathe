@@ -2,28 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Spinner } from 'react-bootstrap'
 import LoadingBar from 'react-redux-loading'
-
 import { SET_AUTHED } from '../actions/authedUser'
+import { IS_LOGGED } from '../actions/logged'
+import { handleInitialData } from '../actions/shared'
 
 class Login extends Component {
     state = {
-        showLoading: false
+        showLoading: true
     }
-
     signin = () => {
         this.props.setAuthedUser(this.select.value)
+        this.props.setIsLogged()
     }
     render() {
-
-        const { loadingBar } = this.props
-        let showLoading = false
-        if (loadingBar.default === undefined || loadingBar.default === 1) {
-            showLoading = true
-        }
-        const { userNames } = this.props
+        const { userNames,loadingBar } = this.props
         return (
             <div>
-                { showLoading ? (
+                { loadingBar.default===1  ? (
                     <div>
                         <LoadingBar />
                         <Spinner animation='border' variant='warning' />
@@ -47,7 +42,7 @@ class Login extends Component {
                                     </option>
                                 )) }
                             </select>
-                            <button onClick={ this.signin }>SignIn</button>
+                            <button onClick={ () => { this.signin() } }>SignIn</button>
                         </div>
                     )
                 }
@@ -56,7 +51,7 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = ({ loadingBar, users }) => {
+const mapStateToProps = ({ loadingBar, users, isLogged, questions }) => {
     return {
         userNames: Object.keys(users).map(id => ({
             id: id,
@@ -64,12 +59,15 @@ const mapStateToProps = ({ loadingBar, users }) => {
             img: users[id].avatarURL
         })),
         loadingBar,
+        isLogged,
+        questions,
     }
 }
 
 const mapdispatchToProps = dispatch => {
     return {
-        setAuthedUser: id => dispatch({ type: SET_AUTHED, id })
+        setAuthedUser: id => dispatch({ type: SET_AUTHED, id }),
+        setIsLogged: () => dispatch({ type: IS_LOGGED }),
     }
 }
 export default connect(mapStateToProps, mapdispatchToProps)(Login)
