@@ -13,9 +13,7 @@ class NavItem extends Component{
         }
         const { isLogged }=this.props
         return (
-            <div>
-           
-                <Navbar bg="light" expand="md">
+                <Navbar className='nav' expand="md">
                     <Container>
                         <Navbar.Brand href ="#">Would You Razer</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -30,7 +28,6 @@ class NavItem extends Component{
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            </div>
         )
     }
 }

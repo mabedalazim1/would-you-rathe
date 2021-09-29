@@ -8,7 +8,7 @@ class NewQuestion extends Component {
     authedUser && console.log('New',Object.values(authedUser))
     return (
       <div className='con'>
-        { !isLogged.logged ? <h3>Not Logged NewQuestion <Login /></h3>:<h1>NewQuestion</h1> 
+        { !isLogged.logged ? <Login />:<h1>NewQuestion</h1> 
         }
         { isLogged.logged && authedUser && <h3> Logged is : {Object.values(authedUser)}</h3> }
         

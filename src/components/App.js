@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Router>
-        <div className='App container'>
+        <div className='App'>
                <NavItem />
             <Switch>
              

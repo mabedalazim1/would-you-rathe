@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Spinner } from 'react-bootstrap'
+import { Spinner, Form } from 'react-bootstrap'
 import LoadingBar from 'react-redux-loading'
 import { SET_AUTHED } from '../actions/authedUser'
 import { IS_LOGGED } from '../actions/logged'
@@ -15,34 +15,42 @@ class Login extends Component {
         this.props.setIsLogged()
     }
     render() {
-        const { userNames,loadingBar } = this.props
+        const { userNames, loadingBar } = this.props
         return (
             <div>
-                { loadingBar.default===1  ? (
+                { loadingBar.default === 1 ? (
                     <div>
-                        <LoadingBar />
-                        <Spinner animation='border' variant='warning' />
+                        <LoadingBar style={{backgroundColor: "green"}}/> 
+                        <Spinner
+                            className="spinner"
+                            animation='border'
+                            variant="custom" />
                         <br />
                         <i>Loading ... </i>
                     </div>
                 )
                     :
                     (
-                        <div>
-                            <h2>Login </h2>
-                            <select
-                                defaultValue={ this.state.selectValue }
-                                ref={ select => {
-                                    this.select = select
-                                } }
-                            >
-                                { userNames.map(item => (
+                        <div className='login'>
+                            <h4>Login </h4>
+
+                            <Form.Group className="mb-3 log-form" controlId="formBasicSelect">
+                                <Form.Label>Select User</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    defaultValue={ this.state.selectValue }
+                                    ref={ select => {
+                                        this.select = select
+                                    } }
+                                >
+                                     { userNames.map(item => (
                                     <option key={ item.id } value={ item.id }>
                                         { item.name }
                                     </option>
                                 )) }
-                            </select>
-                            <button onClick={ () => { this.signin() } }>SignIn</button>
+                                </Form.Control>
+                            </Form.Group>
+                            <button onClick={ () => { this.signin() } }>Sign In</button>
                         </div>
                     )
                 }
