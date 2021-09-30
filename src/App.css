@@ -15,6 +15,40 @@ body{
   color: rgb(2, 126, 49) !important;
   text-decoration: underline;
 }
+.nav-con{
+  flex: 1;
+  display: flex;
+}
+.loged-con{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: rgb(4, 66, 12);
+  font-weight: bold;
+}
+.loged-con button{
+  border: none;
+  background-color: #cce3d1;
+} 
+.loged-con p{
+  margin: 0;
+  padding-right: 10px;
+  font-size: 14px;
+}
+@media(max-width: 766px){
+  .loged-con{
+    justify-content: center;
+    margin: 10px 0;
+  }
+}
+.loged-con button:hover{
+  color: #38b655;
+}
+.nav .user-img{
+  width: 30px;
+  height: 30px;
+}
 .spinner{
   margin-top: 100px;
 }

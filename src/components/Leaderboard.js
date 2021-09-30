@@ -5,15 +5,11 @@ import Login from './Login'
 class Leaderboard extends Component{
 
     render() {
-        const { authedUser } = this.props
+        const { isLogged } = this.props
         return (
             <div className='con'>
-             { authedUser &&
-                <div>
-                    Leaderboard
-                </div>
-            }
-      </div>
+              { !isLogged.logged ? <Login />:<h1>Leaderboard</h1> }
+            </div>
     )
   }
 }

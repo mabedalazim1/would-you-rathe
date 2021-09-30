@@ -4,11 +4,10 @@ import { Spinner, Form } from 'react-bootstrap'
 import LoadingBar from 'react-redux-loading'
 import { SET_AUTHED } from '../actions/authedUser'
 import { IS_LOGGED } from '../actions/logged'
-import { handleInitialData } from '../actions/shared'
 
 class Login extends Component {
     state = {
-        showLoading: true
+        showLoading: true,
     }
     signin = () => {
         this.props.setAuthedUser(this.select.value)
@@ -33,12 +32,10 @@ class Login extends Component {
                     (
                         <div className='login'>
                             <h4>Login </h4>
-
                             <Form.Group className="mb-3 log-form" controlId="formBasicSelect">
                                 <Form.Label>Select User</Form.Label>
                                 <Form.Control
                                     as="select"
-                                    defaultValue={ this.state.selectValue }
                                     ref={ select => {
                                         this.select = select
                                     } }

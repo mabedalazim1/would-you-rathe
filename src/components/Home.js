@@ -13,7 +13,6 @@ class Home extends Component {
     }
     render() {
         const {
-            authedUser,
             users,
             isLogged,
             unansweredQues,

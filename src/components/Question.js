@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 class Question extends Component {
   render () {
     const { question, questionId, author } = this.props
-
+   
     return (
       <div className='question-con'>
         <Card className='q-card'>
@@ -24,12 +24,9 @@ class Question extends Component {
             or...
           </Card.Body>
           <Card.Footer>
-            <Link
-              to={{
-                pathname: '/questions/' + questionId,
-                state: { questionId: questionId }
-              }}>
-              <Button className='q-btn'>View Question</Button>
+            <Link to={`/questions/${questionId}`}> 
+              {/* <Button className='q-btn'>View Question</Button> */ }
+              View Question
             </Link>
           </Card.Footer>
         </Card>

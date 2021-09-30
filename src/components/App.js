@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {  BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
 import './../App.css'
-import Login from './Login'
+import EditQuestion from './EditQuestion'
 import Home from './Home'
 import NotFound from './NotFound'
 import NewQuestion from './NewQuestion'
@@ -14,36 +14,34 @@ class App extends Component {
   state = {
     authedUser: null
   }
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch(handleInitialData())
   }
-  render () {
-    const { isLogged, authedUser } = this.props
- 
+  render() {
     return (
       <React.Fragment>
         <Router>
-        <div className='App'>
-               <NavItem />
+          <div className='App'>
+            <NavItem />
             <Switch>
-             
-                <Route exact path='/'>
-                  <Home />
-                </Route>
-                <Route exact path='/add'>
-                  <NewQuestion />
-                </Route>
-                <Route exact path='/leaderboard'>
-                  <Leaderboard />
-                </Route>
-                <Route component={ NotFound } />
-              </Switch>
-             
-            
+              <Route exact path='/'>
+                <Home />
+              </Route>
+              <Route exact path='/add'>
+                <NewQuestion />
+              </Route>
+              <Route exact path='/leaderboard'>
+                <Leaderboard />
+              </Route>
+              <Route
+               exact path="/questions/:question_id">
+              <EditQuestion /> 
+              </Route>
+              <Route component={ NotFound } />
+            </Switch>
           </div>
         </Router>
-        </React.Fragment>
-     
+      </React.Fragment>
     )
   }
 }
