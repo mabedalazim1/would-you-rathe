@@ -34,7 +34,7 @@ class App extends Component {
                 <Leaderboard />
               </Route>
               <Route
-               exact path="/questions/:question_id">
+                exact path="/questions/:question_id">
               <EditQuestion /> 
               </Route>
               <Route component={ NotFound } />

@@ -47,7 +47,7 @@ export function handleAddQuestion(optionOne, optionTwo) {
 	}
 }
 
-export function handleAddAnswer(questionId, answer) {
+export function handleAddUserAnswer(questionId, answer) {
 	return (dispatch, getState) => {
 		const { authedUser } = getState()
 

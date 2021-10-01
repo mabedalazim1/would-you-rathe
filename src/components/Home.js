@@ -17,7 +17,7 @@ class Home extends Component {
             isLogged,
             unansweredQues,
             answeredQues,
-            questions
+            questions,
         } = this.props
         return (
             <div className='con'>

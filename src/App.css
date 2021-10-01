@@ -119,3 +119,17 @@ body{
 .question-con .q-btn:hover{
   background-color: #9bddaa;
 }
+
+.asks{
+  color: #38b655;
+  margin-top: 15px;
+}
+.progress{
+  background-color: rgb(220, 233, 222)!important;
+  color: rgb(80, 43, 43) !important;
+  
+}
+.progress-custom {
+  background-color: purple;
+  color: white;
+}
