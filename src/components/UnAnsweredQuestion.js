@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { handleAddUserAnswer } from '../actions/questions'
-import { addUserAnswer } from '../actions/users'
-import { RESET_AUTHED } from '../actions/authedUser'
+import { handleSaveAnswer } from "../actions/questions"
+import { addUserAnswer } from "../actions/users"
 
 class UnAnsweredQuestion extends Component {
   state = {
@@ -14,14 +13,34 @@ class UnAnsweredQuestion extends Component {
     this.setState({
         selected: e.target.id
     })
-    }
-    
-    handleSubmit = e => {
-        e.preventDefault()
-    }
+    const qid= this.props.questionId.question_id
+    console.log(qid)
+  }
+  
+  handleSubmit = e => {
+    const { dispatch, authedUser } = this.props
+    const qid= this.props.questionId.question_id
+    const answer = this.state.selected
+    e.preventDefault()
+      dispatch(
+        addUserAnswer({
+          authedUser,
+          qid,
+          answer,
+        })
+      )
 
-  render () {
-    const { author, question } = this.props
+      dispatch(
+        handleSaveAnswer({
+          authedUser,
+          qid,
+          answer,
+        })
+    )
+}
+
+  render() {
+    const { author, question} = this.props
     return (
       <div className='question-con'>
         <Card className='q-card'>
@@ -44,8 +63,24 @@ class UnAnsweredQuestion extends Component {
                   id='optionOne'
                   onChange={e => this.onChange(e)}
                 />
+                <Form.Check
+                  type='radio'
+                  label={question.optionTwo.text}
+                  name='q-radio'
+                  id='optionTwo'
+                  onChange={e => this.onChange(e)}
+                />
               </Form.Group>
             </Card.Body>
+            <Card.Footer>
+            <Button
+              variant="primary"
+              type="submit"
+              disabled={this.state.selected === "none"}
+            >
+              Submit
+            </Button>
+          </Card.Footer>
           </Form>
         </Card>
       </div>
@@ -55,16 +90,12 @@ class UnAnsweredQuestion extends Component {
 
 const  mapStateToProps = ({users, questions, authedUser })=> {
     return {
-        users,
+      users,
       questions,
-      authedUser,
-      
+      authedUser,      
     };
 }
   
-const mapdispatchToProps = dispatch => {
-    return {
-       /// Edit Hear
-    }
-}
-export default connect(mapStateToProps,mapdispatchToProps)(UnAnsweredQuestion)
+
+
+export default connect(mapStateToProps)(UnAnsweredQuestion)

@@ -1,73 +1,49 @@
-import {hideLoading, showLoading  } from 'react-redux-loading-bar'
-import { saveAnswer, saveQuestion } from '../utils/api'
+import { saveAnswer, saveQuestion } from "../utils/api"
 
+export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER"
+export const SAVE_QUESTION = "SAVE_QUESTION"
+export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS"
 
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ADD_ANSWER = 'ADD_ANSWER'
+function saveUserAnswer({authedUser, qid, answer }) {
+  return {
+    type: SAVE_QUESTION_ANSWER,
+    authedUser,
+    qid,
+    answer,
+  }
+}
 
 export function receiveQuestions(questions) {
-	return {
-		type: RECEIVE_QUESTIONS,
-		questions,
-	};
+  return {
+    type: RECEIVE_QUESTIONS,
+    questions
+  }
 }
 
-function addQuestion(question) {
-	return {
-		type: ADD_QUESTION,
-		question,
-	};
+function saveNewQuestion({ optionOneText, optionTwoText, author }) {
+  return {
+    type: SAVE_QUESTION,
+    author,
+    optionOneText,
+    optionTwoText,
+  }
 }
 
-function addAnswer({ questionId, answer, authedUser }) {
-	return {
-		type: ADD_ANSWER,
-		answerInfo: {
-			questionId,
-			answer,
-			authedUser,
-		}
-	};
+export function handleSaveQuestion(question) {
+  return dispatch => {
+    dispatch(saveNewQuestion(question));
+    return saveQuestion(question).catch(e => {
+      console.log("Error:", e);
+    })
+  }
 }
 
-export function handleAddQuestion(optionOne, optionTwo) {
-	return (dispatch, getState) => {
-		const { authedUser } = getState()
-
-		dispatch(showLoading());
-
-		return saveQuestion({
-			optionOneText: optionOne,
-			optionTwoText: optionTwo,
-			author: authedUser,
-		})
-			.then((question) => dispatch(addQuestion(question)))
-			.then(() => dispatch(hideLoading()))
-	}
+export function handleSaveAnswer(info) {
+  console.log('function handleSaveAnswer',info)
+  return dispatch => {
+    dispatch(saveUserAnswer(info));
+    return saveAnswer(info).catch(e => {
+      console.log("Error:", e)
+    })
+  }
 }
-
-export function handleAddUserAnswer(questionId, answer) {
-	return (dispatch, getState) => {
-		const { authedUser } = getState()
-
-		dispatch(showLoading());
-
-		return saveAnswer({
-			questionId,
-			answer,
-			authedUser
-		})
-			.then(() =>
-				dispatch(
-					addAnswer({
-						questionId,
-						answer,
-						authedUser
-					})
-				)
-			)
-			.then(() => dispatch(hideLoading()))
-	}
-}
-
