@@ -11,6 +11,6 @@ The main points in this project is:
 ## Application Instructions:
 
 * install dependencies with: `npm install`
-* Run The Application with: `npm start` Or `yarn start`
+* Run The Application with: `npm start` or `yarn start`
 
 #### By Mohamed Abedalazim
