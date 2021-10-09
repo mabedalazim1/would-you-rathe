@@ -11,9 +11,7 @@ import Leaderboard from './Leaderboard'
 import NavItem from './NavItem'
 
 class App extends Component {
-  state = {
-    authedUser: null
-  }
+  
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }

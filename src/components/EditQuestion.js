@@ -20,13 +20,12 @@ const EditQuestion = props => {
   if (question !== undefined) {
     author = users[question.author]
     if (users[authedUser] !== undefined) {
-      console.log('Users answers', users[authedUser].answers)
       answered = Object.keys(users[authedUser].answers).includes(question.id)
       // Votes
       countlVotes =
         question.optionOne.votes.length + question.optionTwo.votes.length
-      percentOptionOne = (question.optionOne.votes.length / countlVotes) * 100
-      percentOptionTow = (question.optionTwo.votes.length / countlVotes) * 100
+      percentOptionOne = Math.round((question.optionOne.votes.length / countlVotes) * 100)
+      percentOptionTow = Math.round((question.optionTwo.votes.length / countlVotes) * 100)
     }
   }
 

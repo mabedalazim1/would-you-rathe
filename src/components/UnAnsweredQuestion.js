@@ -74,7 +74,7 @@ class UnAnsweredQuestion extends Component {
             </Card.Body>
             <Card.Footer>
             <Button
-              variant="primary"
+              className="btn-submit"
               type="submit"
               disabled={this.state.selected === "none"}
             >

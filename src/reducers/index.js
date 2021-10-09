@@ -6,9 +6,9 @@ import users from './users'
 import isLogged from './logged'
 
 export default combineReducers({
-	isLogged,
-	authedUser,
-	questions,
-	users,
-	loadingBar: loadingBarReducer,
+  isLogged,
+  authedUser,
+  questions,
+  users,
+  loadingBar: loadingBarReducer
 })

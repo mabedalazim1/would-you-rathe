@@ -23,7 +23,7 @@ const  Question = (props)=>  {
           </Card.Body>
           <Card.Footer>
             <Link to={`/questions/${questionId}`}> 
-              <Button className='q-btn'>View Question</Button> 
+              <Button className='btn-submit'>View Question</Button> 
             </Link>
           </Card.Footer>
         </Card>

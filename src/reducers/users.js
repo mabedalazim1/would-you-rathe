@@ -1,10 +1,9 @@
-import { RECEIVE_USERS, ADD_USER_ANSWER } from "../actions/users"
+import { RECEIVE_USERS, ADD_USER_ANSWER } from '../actions/users'
 
-export default function users(state = {}, action) {
-	switch (action.type) {
-	  
-		case ADD_USER_ANSWER:
-      console.log("Users ADD_USER_ANSWER: ", action)
+export default function users (state = {}, action) {
+  switch (action.type) {
+    case ADD_USER_ANSWER:
+      console.log('Users ADD_USER_ANSWER: ', action)
       return {
         ...state,
         [action.authedUser]: {
@@ -14,8 +13,8 @@ export default function users(state = {}, action) {
             [action.qid]: action.answer
           }
         }
-			}
-		
+      }
+
     case RECEIVE_USERS:
       return {
         ...state,

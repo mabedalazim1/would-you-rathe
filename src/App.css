@@ -52,6 +52,19 @@ body{
 .spinner{
   margin-top: 100px;
 }
+/* Buttons */  
+.btn-submit,
+.btn-submit:disabled{
+  background-color: #cce3d1;
+  color: #000;
+  border: 1px solid #99e5ac;
+  border-radius: 5px;
+}
+.btn-submit:hover{
+  background-color: #9bddaa;
+  border: 1px solid #99e5ac;
+}
+
 /* Login */
 .login{
   margin: 80px auto;
@@ -64,13 +77,9 @@ body{
   margin-bottom: 15px;
 }
 .login button{
-  border-radius: 5px;
   width: 70px;
-  background-color: #cce3d1;
 }
-.login button:hover{
-  background-color: #afe9bc;
-}
+
 .log-form{
   max-width: 300px;
   margin: auto;
@@ -109,16 +118,6 @@ body{
   width: 50px;
   float: left;
 }
-.question-con .q-btn{
-  background-color: #cce3d1;
-  color: #000;
-  border: 1px solid #99e5ac;
-  border-radius: 5px;
-}
-
-.question-con .q-btn:hover{
-  background-color: #9bddaa;
-}
 
 .asks{
   color: #38b655;
@@ -132,4 +131,56 @@ body{
 .progress-custom {
   background-color: purple;
   color: white;
+}
+
+/* New Question */
+
+.new-q-con{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.new-q-con .card{
+  width: 500px;
+}
+
+@media(max-width: 766px){
+  .new-q-con .card{
+    width: 400px;
+  }
+}
+.new-q-con .btn-submit{
+ width: 85px;
+}
+
+/* Leader Board */
+
+.leader-board-con li{
+  list-style-type: none;
+}
+
+.leader-board-con .card{
+  margin: auto;
+  margin-top: 20px;
+  max-width: 500px;
+
+}
+
+.leader-board-con img{
+  width: 70px;
+}
+
+.leader-board-con .title{
+  background-color: #cce3d1;
+  color: #011305;
+}
+
+.leader-board-con .score-no{
+  font-weight: bold;
+}
+
+.leader-board-con .link{
+  margin-bottom: 50px;
 }
